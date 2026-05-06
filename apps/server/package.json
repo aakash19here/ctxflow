@@ -1,0 +1,44 @@
+{
+  "name": "server",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
+    "dev": "NODE_ENV=development bun --hot src/index.ts --port 3000",
+    "start": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^1.2.3",
+    "@ai-sdk/groq": "^2.0.1",
+    "@ai-sdk/openai": "^2.0.19",
+    "@hono/node-server": "^1.14.4",
+    "@hono/trpc-server": "^0.4.0",
+    "@repo/auth": "workspace:*",
+    "@repo/db": "workspace:*",
+    "@repo/ratelimit": "workspace:*",
+    "@repo/rpc": "workspace:*",
+    "@sentry/node": "^10.11.0",
+    "@trpc/client": "^11.4.2",
+    "@trpc/server": "^11.4.2",
+    "@vercel/blob": "^1.1.1",
+    "ai": "^5.0.2",
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.1",
+    "exa-js": "^1.10.2",
+    "hono": "^4.8.2",
+    "hono-pino": "^0.10.1",
+    "pino": "^9.8.0",
+    "pino-pretty": "^13.1.1",
+    "resend": "^6.0.2",
+    "stoker": "^2.0.1",
+    "voyageai": "^0.0.8",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "tsdown": "^0.12.9",
+    "tsx": "^4.19.2",
+    "typescript": "catalog:"
+  }
+}

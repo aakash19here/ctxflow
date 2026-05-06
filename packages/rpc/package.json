@@ -1,0 +1,35 @@
+{
+  "name": "@repo/rpc",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@langchain/community": "^0.3.54",
+    "@langchain/core": "^0.3.73",
+    "@langchain/textsplitters": "^0.1.0",
+    "@mendable/firecrawl-js": "^1.29.3",
+    "@repo/auth": "workspace:*",
+    "@repo/db": "workspace:*",
+    "@repo/ratelimit": "workspace:*",
+    "@trpc/server": "^11.4.2",
+    "@upstash/ratelimit": "^2.0.6",
+    "@upstash/redis": "^1.35.3",
+    "@upstash/vector": "^1.2.2",
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.1",
+    "drizzle-zod": "^0.8.3",
+    "mammoth": "^1.10.0",
+    "pdf-loader": "^1.0.2",
+    "pdf-parse": "^1.1.1",
+    "word-extractor": "^1.0.4",
+    "zod": "catalog:"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["./**/*.tsx", "./config.ts", "./**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

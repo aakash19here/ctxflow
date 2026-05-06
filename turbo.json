@@ -1,0 +1,66 @@
+{
+  "globalEnv": ["DATABASE_URL"],
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build", "@repo/db#db:generate"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "env": [
+        "CORS_ORIGIN",
+        "BETTER_AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "NEXT_PUBLIC_AUTH_URL",
+        "NEXT_PUBLIC_SERVER_URL",
+        "DATABASE_URL",
+        "REDIS_URL",
+        "GROQ_API_KEY",
+        "UPSTASH_VECTOR_REST_URL",
+        "UPSTASH_VECTOR_REST_TOKEN",
+        "FIRECRAWL_API_KEY",
+        "BLOB_READ_WRITE_TOKEN",
+        "RESEND_API_KEY",
+        "OPENAI_API_KEY",
+        "UPSTASH_REDIS_REST_URL",
+        "UPSTASH_REDIS_REST_TOKEN",
+        "FROM_EMAIL",
+        "EXA_API_KEY",
+        "VOYAGE_API_KEY",
+        "LLM_MODEL"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:generate": {
+      "cache": false,
+      "persistent": false
+    },
+    "db:migrate": {
+      "cache": false,
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "persistent": false
+    },
+    "db:push": {
+      "cache": false,
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "persistent": false
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": true
+    },
+    "shadcn:add": {
+      "interactive": true,
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

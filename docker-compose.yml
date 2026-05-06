@@ -1,0 +1,58 @@
+name: ctxflow
+
+services:
+  postgres:
+    image: postgres
+    container_name: ctxflow-postgres
+    environment:
+      POSTGRES_DB: ctxflow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
+    container_name: ctxflow-redis
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  serverless-redis-http: 
+    ports:
+      - "8079:80"
+    image: hiett/serverless-redis-http:latest
+    environment:
+      SRH_MODE: env
+      SRH_TOKEN: ctxflow
+      SRH_CONNECTION_STRING: "redis://redis:6379" 
+  redisinsight: # to view the data in redis
+    image: redislabs/redisinsight:latest
+    container_name: redisinsight
+    depends_on:
+      - redis
+    ports:
+    - "5540:5540" 
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  ctxflow-network:
+    driver: bridge

@@ -1,0 +1,33 @@
+{
+  "name": "@repo/db",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/pg": "^8.15.5",
+    "dotenv-cli": "^10.0.0",
+    "drizzle-kit": "^0.31.5",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/node": "^24.1.0",
+    "dotenv": "^17.2.1",
+    "drizzle-orm": "catalog:",
+    "pg": "^8.16.3",
+    "uuid": "^13.0.0"
+  },
+  "scripts": {
+    "db:clean": "git clean -xdf .cache .turbo dist node_modules",
+    "db:typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:migrate": "drizzle-kit generate && tsx src/migrate.ts",
+    "db:deploy": "tsx src/migrate.ts"
+  }
+}
