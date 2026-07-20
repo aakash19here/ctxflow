@@ -16,7 +16,6 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
-    "strictNullChecks": true,
-    "ignoreDeprecations": "6.0"
+    "strictNullChecks": true
   }
 }
