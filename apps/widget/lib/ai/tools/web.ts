@@ -1,6 +1,6 @@
 import { tool, UIMessageStreamWriter } from "ai";
 import Exa from "exa-js";
-import { ChatMessage } from "lib/types";
+import { ChatMessage } from "@/lib/types";
 import { z } from "zod";
 
 const exa = new Exa(process.env.EXA_API_KEY || "");

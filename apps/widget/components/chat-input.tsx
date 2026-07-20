@@ -20,7 +20,7 @@ import {
   PromptInputTools,
 } from "./prompt-input";
 import { toast } from "sonner";
-import { useMicrophone } from "hooks/use-microphone";
+import { useMicrophone } from "@/hooks/use-microphone";
 
 interface ChatInputProps {
   status: UseChatHelpers<UIMessage>["status"];

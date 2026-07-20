@@ -7,7 +7,7 @@ import {
   ChainOfThoughtStep,
 } from "@repo/ui/components/ai-elements/chain-of-thought";
 import { cn } from "@repo/ui/lib/utils";
-import { WebSearchTool } from "lib/types";
+import { WebSearchTool } from "@/lib/types";
 import { GlobeIcon, Loader2 } from "lucide-react";
 
 interface WebSearchUIProps {

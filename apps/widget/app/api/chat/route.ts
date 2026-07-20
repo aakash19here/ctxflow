@@ -9,25 +9,25 @@ import {
   ToolSet,
   wrapLanguageModel,
 } from "ai";
-import { regularPromptWithWebSearch } from "lib/ai/prompts";
-import { ChatSDKError } from "lib/errors";
+import { regularPromptWithWebSearch } from "@/lib/ai/prompts";
+import { ChatSDKError } from "@/lib/errors";
 
 import * as Sentry from "@sentry/nextjs";
-import { getModel } from "lib/ai/llm";
-import { ragMiddleware } from "lib/ai/middleware";
-import { webSearchTool } from "lib/ai/tools";
-import { markdownJoinerTransform } from "lib/parser";
-import { phClient } from "lib/posthog";
+import { getModel } from "@/lib/ai/llm";
+import { ragMiddleware } from "@/lib/ai/middleware";
+import { webSearchTool } from "@/lib/ai/tools";
+import { markdownJoinerTransform } from "@/lib/parser";
+import { phClient } from "@/lib/posthog";
 import {
   deleteChatById,
   getChatById,
   getMessagesByChatId,
   saveChat,
   saveMessages,
-} from "lib/queries";
-import { PostRequestBody, postRequestBodySchema } from "lib/schema";
-import { ChatMessage } from "lib/types";
-import { convertToUIMessages, generateUUID } from "lib/utils";
+} from "@/lib/queries";
+import { PostRequestBody, postRequestBodySchema } from "@/lib/schema";
+import { ChatMessage } from "@/lib/types";
+import { convertToUIMessages, generateUUID } from "@/lib/utils";
 import { headers } from "next/headers";
 import { NextRequest } from "next/server";
 

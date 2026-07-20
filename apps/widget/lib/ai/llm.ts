@@ -2,7 +2,7 @@ import { createGroq } from "@ai-sdk/groq";
 import { createOpenAI } from "@ai-sdk/openai";
 import { LanguageModelV3 } from "@ai-sdk/provider";
 import { withTracing } from "@posthog/ai";
-import { phClient } from "lib/posthog";
+import { phClient } from "@/lib/posthog";
 
 const groqClient = createGroq({
   apiKey: process.env.GROQ_API_KEY,

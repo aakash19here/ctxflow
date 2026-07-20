@@ -1,7 +1,6 @@
 import { tool } from "ai";
 import { z } from "zod";
 import { findRelevantContent } from "../rag";
-import { writeFileSync } from "fs";
 
 export const getInformationTool = tool({
   description: `ALWAYS use this tool FIRST for any question related to the configured knowledge base. This searches indexed source material such as documentation, policies, programs, and resources. You MUST call this before considering any other information source for knowledge-base-related queries.`,

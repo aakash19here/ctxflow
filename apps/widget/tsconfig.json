@@ -1,9 +1,9 @@
 {
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    //i've removed the baseUrl because it was causing issues with the paths
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./*"],
       "@repo/*": ["../../packages/*"],
       "@repo/ui/*": ["../../packages/ui/src/*"],
       "react": ["./node_modules/@types/react"]

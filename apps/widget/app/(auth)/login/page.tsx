@@ -1,5 +1,5 @@
 import { Landmark } from "lucide-react";
-import OtpAuth from "components/auth/otp";
+import OtpAuth from "@/components/auth/otp";
 import { auth } from "@repo/auth/src";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";

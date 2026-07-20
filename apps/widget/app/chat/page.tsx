@@ -1,12 +1,12 @@
 import { auth } from "@repo/auth/src";
-import Chat from "components/chat";
+import Chat from "@/components/chat";
 import {
   getChatById,
   getFirstUserChat,
   getMessagesByChatId,
-} from "lib/queries";
-import { ChatMessage } from "lib/types";
-import { convertToUIMessages, generateUUID } from "lib/utils";
+} from "@/lib/queries";
+import { ChatMessage } from "@/lib/types";
+import { convertToUIMessages, generateUUID } from "@/lib/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";

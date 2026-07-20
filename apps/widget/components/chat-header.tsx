@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components/dropdown-menu";
-import { ChatStatus, DBMessage } from "lib/types";
+import { ChatStatus, DBMessage } from "@/lib/types";
 import {
   Landmark,
   Loader2Icon,

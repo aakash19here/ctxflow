@@ -2,7 +2,7 @@
 
 import Dexie from "dexie";
 import { useLiveQuery } from "dexie-react-hooks";
-import { getDB, type DBMessage } from "lib/db";
+import { getDB, type DBMessage } from "@/lib/db";
 
 export function useChatMessages(chatId: string) {
   const result = useLiveQuery<DBMessage[] | undefined>(async () => {
