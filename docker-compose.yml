@@ -11,7 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ctxflow_postgres_data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -24,7 +24,7 @@ services:
       - "6379:6379"
     container_name: ctxflow-redis
     volumes:
-      - redis_data:/data
+      - ctxflow_redis_data:/data
     healthcheck:
       test: ["CMD-SHELL", "redis-cli ping"]
       interval: 10s
@@ -48,9 +48,9 @@ services:
     - "5540:5540" 
 
 volumes:
-  postgres_data:
+  ctxflow_postgres_data:
     driver: local
-  redis_data:
+  ctxflow_redis_data:
     driver: local
 
 networks:
