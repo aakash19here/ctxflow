@@ -8,7 +8,6 @@ import "dotenv/config";
 import createApp from "./lib/create-app";
 import { health } from "./routes/health";
 import { upload } from "./routes/upload";
-import { whatsappChat, whatsappwebhook } from "./routes/whatsapp";
 
 const app = createApp();
 
@@ -27,8 +26,6 @@ app.use(
 );
 
 app.route("/", upload);
-app.route("/", whatsappwebhook);
-app.route("/", whatsappChat);
 
 app.get("/", (c) => {
   return c.text("200 OK");
