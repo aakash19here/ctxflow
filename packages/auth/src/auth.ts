@@ -122,17 +122,5 @@ export const auth = betterAuth({
       },
     }),
   ],
-  databaseHooks: {
-    user: {
-      create: {
-        before: async () => {
-          throw new APIError("FORBIDDEN", {
-            message:
-              "Sign-ups are temporarily closed. Please try again later.",
-          });
-        },
-      },
-    },
-  },
   baseURL: process.env.BETTER_AUTH_URL,
 });
