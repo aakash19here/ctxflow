@@ -10,7 +10,7 @@ import { PreviewAttachment } from "@repo/ui/components/ai/input";
 import { AIMessage, AIMessageContent } from "@repo/ui/components/ai/message";
 import { ThinkingMessage } from "@repo/ui/components/ai/thinking";
 import { Button } from "@repo/ui/components/button";
-import { DefaultChatTransport } from "ai";
+import { DefaultChatTransport, ToolModelMessage } from "ai";
 import { ChatHeader } from "@/components/chat-header";
 import { EmptyScreen } from "@/components/empty-screen";
 import { ChatMessage, DBMessage } from "@/lib/types";

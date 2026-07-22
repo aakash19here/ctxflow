@@ -20,7 +20,7 @@ export function WebSearchUI({ output }: WebSearchUIProps) {
       <ChainOfThoughtHeader />
       <ChainOfThoughtContent>
         <ChainOfThoughtSearchResults>
-          {output.map((website) => (
+          {output.map((website: any) => (
             <ChainOfThoughtSearchResult key={website.url}>
               <a
                 href={website.url}

@@ -8,7 +8,7 @@ export const messageMetadataSchema = z.object({
   createdAt: z.string(),
 });
 
-export type WebSearchTool = InferUITool<ReturnType<typeof webSearchTool>>;
+export type WebSearchTool = InferUITool<typeof webSearchTool>;
 export type GetInformationTool = InferUITool<typeof getInformationTool>;
 
 export type ChatTools = {

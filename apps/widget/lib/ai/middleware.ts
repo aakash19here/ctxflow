@@ -1,10 +1,9 @@
 import { groq } from "@ai-sdk/groq";
 import { LanguageModelV3Middleware } from "@ai-sdk/provider";
-import { generateText, Output } from "ai";
+import { generateText, LanguageModelMiddleware, Output } from "ai";
 import { findRelevantContent } from "./rag";
 
-export const ragMiddleware: LanguageModelV3Middleware = {
-  specificationVersion: "v3",
+export const ragMiddleware: LanguageModelMiddleware = {
   transformParams: async ({ params }) => {
     const { prompt: messages } = params;
 

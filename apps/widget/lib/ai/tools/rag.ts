@@ -1,8 +1,8 @@
-import { tool } from "ai";
+import { Tool, tool } from "ai";
 import { z } from "zod";
 import { findRelevantContent } from "../rag";
 
-export const getInformationTool = tool({
+export const getInformationTool: Tool = tool({
   description: `ALWAYS use this tool FIRST for any question related to the configured knowledge base. This searches indexed source material such as documentation, policies, programs, and resources. You MUST call this before considering any other information source for knowledge-base-related queries.`,
   inputSchema: z.object({
     content: z

@@ -6,7 +6,7 @@ import {
   JsonToSseTransformStream,
   stepCountIs,
   streamText,
-  ToolSet,
+  toUIMessageStream,
   wrapLanguageModel,
 } from "ai";
 import { regularPromptWithWebSearch } from "@/lib/ai/prompts";
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
             },
           },
           tools: {
-            webSearchTool: webSearchTool({ dataStream }),
+            webSearchTool,
           },
           onFinish: async () => {
             await phClient.shutdown();
@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
 
         result.consumeStream();
 
-        dataStream.merge(result.toUIMessageStream());
+        dataStream.merge(toUIMessageStream({stream: result.stream}));
       },
       generateId: generateUUID,
       onFinish: async ({ messages }) => {
