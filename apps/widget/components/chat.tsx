@@ -7,10 +7,20 @@ import {
   AIConversationScrollButton,
 } from "@repo/ui/components/ai/conversation";
 import { PreviewAttachment } from "@repo/ui/components/ai/input";
-import { AIMessage, AIMessageContent } from "@repo/ui/components/ai/message";
+import {
+  Avatar,
+  AvatarFallback,
+} from "@repo/ui/components/avatar";
+import { Bubble, BubbleContent } from "@repo/ui/components/bubble";
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+} from "@repo/ui/components/message";
+
 import { ThinkingMessage } from "@repo/ui/components/ai/thinking";
 import { Button } from "@repo/ui/components/button";
-import { DefaultChatTransport, ToolModelMessage } from "ai";
+import { DefaultChatTransport } from "ai";
 import { ChatHeader } from "@/components/chat-header";
 import { EmptyScreen } from "@/components/empty-screen";
 import { ChatMessage, DBMessage } from "@/lib/types";
@@ -23,6 +33,7 @@ import { PromptInputMessage } from "@/components/prompt-input";
 import { useDataStream } from "./data-stream-provider";
 import { RagSearchLoading } from "./tools/rag-search";
 import { WebSearchLoading, WebSearchUI } from "./tools/web-search";
+import { BotIcon, UserIcon } from "lucide-react";
 
 export default function Chat({
   id,
@@ -94,73 +105,97 @@ export default function Chat({
         <AIConversationContent>
           {messages.length === 0 ? <EmptyScreen /> : null}
 
-          {messages.map((message, index) => (
-            <AIMessage
-              from={message.role === "user" ? "user" : "assistant"}
-              key={index}
-            >
-              <AIMessageContent>
-                {message.parts.map((part, i) => {
-                  const { type } = part;
-                  const key = `message-${message.id}-part-${i}`;
-                  if (type === "text") {
-                    return (
-                      <div key={key}>
-                        <Streamdown key={index}>{part.text}</Streamdown>
-                      </div>
-                    );
-                  }
-                  if (type === "file") {
-                    return (
-                      <div
-                        key={`image-${message.id}-${i}`}
-                        data-testid={`message-attachments`}
-                        className="flex flex-row justify-start gap-2"
-                      >
-                        <PreviewAttachment
-                          key={index}
-                          attachment={{
-                            name: part.filename ?? "file",
-                            contentType: part.mediaType as any,
-                            url: part.url,
-                          }}
-                          showTitle={false}
-                        />
-                      </div>
-                    );
-                  }
-                  if (type === "tool-getInformationTool") {
-                    const { toolCallId, state } = part;
+          {messages.map((message) => {
+            const isUser = message.role === "user";
+            const bubbleVariant = isUser ? "tinted" : "default";
 
-                    return (
-                      <div key={toolCallId} className="flex">
-                        {state === "input-available" && <RagSearchLoading />}
-                      </div>
-                    );
-                  }
-                  if (type === "tool-webSearchTool") {
-                    const { toolCallId, state, output } = part;
+            return (
+              <Message
+                align={isUser ? "end" : "start"}
+                key={message.id}
+              >
+                <MessageAvatar>
+                  <Avatar>
+                    <AvatarFallback>
+                      {isUser ? (
+                        <UserIcon className="h-4 w-4" />
+                      ) : (
+                        <BotIcon className="h-4 w-4" />
+                      )}
+                    </AvatarFallback>
+                  </Avatar>
+                </MessageAvatar>
+                <MessageContent>
+                  {message.parts.map((part, i) => {
+                    const { type } = part;
+                    const key = `message-${message.id}-part-${i}`;
+                    if (type === "text") {
+                      return (
+                        <Bubble key={key} variant={bubbleVariant}>
+                          <BubbleContent>
+                            <Streamdown>{part.text}</Streamdown>
+                          </BubbleContent>
+                        </Bubble>
+                      );
+                    }
+                    if (type === "file") {
+                      return (
+                        <div
+                          key={`image-${message.id}-${i}`}
+                          data-testid={`message-attachments`}
+                          className="flex flex-row justify-start gap-2"
+                        >
+                          <PreviewAttachment
+                            attachment={{
+                              name: part.filename ?? "file",
+                              contentType: part.mediaType as any,
+                              url: part.url,
+                            }}
+                            showTitle={false}
+                          />
+                        </div>
+                      );
+                    }
+                    if (type === "tool-getInformationTool") {
+                      const { toolCallId, state } = part;
 
-                    return (
-                      <div key={toolCallId} className="flex ">
-                        {state === "input-available" && <WebSearchLoading />}
+                      return (
+                        <div key={toolCallId} className="flex">
+                          {state === "input-available" && <RagSearchLoading />}
+                        </div>
+                      );
+                    }
+                    if (type === "tool-webSearchTool") {
+                      const { toolCallId, state, output } = part;
 
-                        {state === "output-available" && output.length >= 1 && (
-                          <WebSearchUI output={output} />
-                        )}
-                      </div>
-                    );
-                  }
-                })}
-              </AIMessageContent>
-            </AIMessage>
-          ))}
+                      return (
+                        <div key={toolCallId} className="flex">
+                          {state === "input-available" && <WebSearchLoading />}
+
+                          {state === "output-available" && output.length >= 1 && (
+                            <WebSearchUI output={output} />
+                          )}
+                        </div>
+                      );
+                    }
+                  })}
+                </MessageContent>
+              </Message>
+            );
+          })}
           {status === "submitted" && (
-            <AIMessage from="assistant">
-              <AIMessageContent>
+            <Message align="start">
+              <MessageAvatar>
+                <Avatar>
+                  <AvatarFallback>
+                    <BotIcon className="h-4 w-4" />
+                  </AvatarFallback>
+                </Avatar>
+              </MessageAvatar>
+              <MessageContent>
                 <ThinkingMessage />
-              </AIMessageContent>
-            </AIMessage>
+              </MessageContent>
+            </Message>
           )}
         </AIConversationContent>
         <AIConversationScrollButton />

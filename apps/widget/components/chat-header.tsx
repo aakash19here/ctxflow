@@ -125,8 +125,7 @@ function PureChatHeader({
   return (
     <header className="shrink-0 flex justify-between items-center gap-2 border-b bg-white py-3 px-2.5">
       <div className="flex items-center gap-1">
-        <Landmark />
-        CtxFlow
+        Ctxflow
       </div>
       <div className="flex items-center gap-2">
         <UserMenu

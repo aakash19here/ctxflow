@@ -29,8 +29,14 @@ export const findRelevantContent = async (userQuery: string) => {
       returnDocuments: true,
     });
 
+    // If the reranker returns nothing, fall back to the raw context.
     if (!results.data || results.data.length === 0) {
-      return fallback;
+      return {
+        data: documents.map((document, index) => ({
+          index,
+          document,
+        })),
+      } satisfies RerankResponse;
     }
 
     return results;
